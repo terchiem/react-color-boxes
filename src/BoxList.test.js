@@ -14,16 +14,15 @@ it("matches snapshot", function() {
 })
 
 
-
 describe("adding/removing boxes", function () {
-  let renderedBox;
+  let renderedBoxList;
 
   beforeEach(function () {
-    renderedBox = render(<BoxList />);
-    const widthInput = renderedBox.getByLabelText("Width:");
-    const heightInput = renderedBox.getByLabelText("Height:");
-    const backgroundColorInput = renderedBox.getByLabelText("Background Color:");
-    const submitBtn = renderedBox.queryByText("Add Box");
+    renderedBoxList = render(<BoxList />);
+    const widthInput = renderedBoxList.getByLabelText("Width:");
+    const heightInput = renderedBoxList.getByLabelText("Height:");
+    const backgroundColorInput = renderedBoxList.getByLabelText("Background Color:");
+    const submitBtn = renderedBoxList.queryByText("Add Box");
 
     fireEvent.change(widthInput, { target: { value: "100" }});
     fireEvent.change(heightInput, { target: { value: "100" }});
@@ -32,13 +31,13 @@ describe("adding/removing boxes", function () {
   })
 
   it("can add a new box", function() {
-    // expect a box with a remove button
-    expect(renderedBox.queryByText("x")).toBeInTheDocument();
+    const removeBtn = renderedBoxList.queryByText("x");
+    expect(removeBtn).toBeInTheDocument();
   })
   
   it("can remove an existing box", function () {
-    const removeBtn = renderedBox.queryByText("x");
+    const removeBtn = renderedBoxList.queryByText("x");
     fireEvent.click(removeBtn);
-    expect(renderedBox.queryByText("x")).not.toBeInTheDocument();
+    expect(removeBtn).not.toBeInTheDocument();
   })
 })

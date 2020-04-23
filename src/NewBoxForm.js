@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+/** NewBoxForm: Form component for adding a new Box 
+ * to BoxList.
+ */
 
 function NewBoxForm({ addBox }) {
   const INITIAL_STATE = {
@@ -10,12 +13,14 @@ function NewBoxForm({ addBox }) {
 
   const [ formData, setFormData ] = useState(INITIAL_STATE);
   
+  /** handleSubmit: sends form data to prop function addBox to update state */
   function handleSubmit(evt) {
     evt.preventDefault();
     addBox(formData);
     setFormData(INITIAL_STATE);
   }
 
+  /** handleChange: updates form data state for each input change */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData(data => ({
@@ -33,7 +38,6 @@ function NewBoxForm({ addBox }) {
         name="width" 
         value={ formData.width }
         onChange={handleChange}
-        type="text"
       />
       
       <label htmlFor="height">Height: </label>
@@ -42,7 +46,6 @@ function NewBoxForm({ addBox }) {
         name="height" 
         value={ formData.height }
         onChange={handleChange}
-        type="text"
       />
       
       <label htmlFor="backgroundColor">Background Color: </label>
@@ -51,7 +54,6 @@ function NewBoxForm({ addBox }) {
         name="backgroundColor" 
         value={ formData.backgroundColor }
         onChange={handleChange}
-        type="text"
       />
       
       <button>Add Box</button>

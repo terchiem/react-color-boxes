@@ -1,8 +1,13 @@
 import React from 'react';
 
+
+/** Box: Controlled by BoxList. Has a button to remove itself
+ * from the parent's state.
+ */
+
 function Box({width, height, backgroundColor, id, removeBox }) {
 
-  const style = { 
+  const boxStyle = { 
     width: `${width}px`, 
     height: `${height}px`, 
     backgroundColor,
@@ -10,12 +15,13 @@ function Box({width, height, backgroundColor, id, removeBox }) {
     margin: "10px"
   };
 
+  /** handleRemove: sends id to prop function removeBox to remove box from state */
   function handleRemove() {
     removeBox(id);
   }
 
   return (
-    <div style={style}>
+    <div style={boxStyle}>
       <button onClick={handleRemove}>x</button>
     </div>
   )
